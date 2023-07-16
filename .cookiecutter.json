@@ -1,0 +1,15 @@
+{
+  "_output_dir": "/Users/rgopidi/Documents/src",
+  "_repo_dir": "/Users/rgopidi/.cookiecutters/cookiecutter-hypermodern-python",
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Rajesh Gopidi",
+  "copyright_year": "2023",
+  "development_status": "Development Status :: 3 - Alpha",
+  "email": "rajeshreddyg09@gmail.com",
+  "friendly_name": "Cointracker",
+  "github_user": "Ei5enheim",
+  "license": "MIT",
+  "package_name": "cointracker",
+  "project_name": "cointracker",
+  "version": "0.0.0"
+}
