@@ -93,10 +93,10 @@ class Transactions:
             if limit > 0:
                 bucket_id = bucket_id - 1
 
-        # get entries from network starting with the one less
-        # than block height of the last item.
+        # get entries from network starting with 
+        # block height less than that of the last item.
+        # because there 
         has_more = True
-        block_height = str(int(block_height) - 1)
         while limit > 0 and has_more:
             try:
                 details = self.network_integration.get_transactions_before(
