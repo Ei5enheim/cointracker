@@ -1,6 +1,5 @@
 # Cointracker
 
-[![PyPI](https://img.shields.io/pypi/v/cointracker.svg)][pypi_]
 [![Status](https://img.shields.io/pypi/status/cointracker.svg)][status]
 [![Python Version](https://img.shields.io/pypi/pyversions/cointracker)][python version]
 [![License](https://img.shields.io/pypi/l/cointracker)][license]
@@ -23,18 +22,44 @@
 
 ## Features
 
-- TODO
+-
 
 ## Requirements
 
-- TODO
+- Python 3.8+
+- Cassandra 4+
 
 ## Installation
 
-You can install _Cointracker_ via [pip] from [PyPI]:
+### Setting up dependencies
+- Clone the repository from github
+- cd into the project directory.
+```console
+$ pip3 install poetry
+```
 
 ```console
-$ pip install cointracker
+$ poetry install
+```
+### Cassandra
+```console
+$ docker pull cassandra
+```
+
+```console
+$ docker run -p 9042:9042 -d cassandra:latest
+```
+
+```console
+$ docker exec -it <container_id> cqlsh
+```
+
+```console
+$ CREATE KEYSPACE IF NOT EXISTS cointracker WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+```
+
+```console
+$ INSERT INTO cointracker.user(id, first_name, last_name, email_id, created_at, updated_at,bucket_id) VALUES (uuid(), 'John', 'Doe', 'john.doe@example.com', toTimeStamp(now()), toTimeStamp(now()), 1);
 ```
 
 ## Usage
