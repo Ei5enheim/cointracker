@@ -14,3 +14,6 @@ class Wallet(Model):
     unconfirmed_transactions = columns.BigInt()
     last_updated_at = columns.DateTime()
     currency = columns.Text()
+    transactions_max_bucket_id = columns.BigInt()
+    transactions_min_bucket_id = columns.BigInt()
+    number_transactions_stored = columns.BigInt()

@@ -3,8 +3,8 @@ from cassandra.cqlengine.models import Model
 
 
 class User(Model):
-    id = columns.UUID
-    email = columns.Text(primary_key=True)
+    id = columns.UUID()
+    email_id = columns.Text(primary_key=True)
     first_name = columns.Text()
     last_name = columns.Text()
     created_at = columns.DateTime()
