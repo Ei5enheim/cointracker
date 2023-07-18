@@ -22,7 +22,10 @@
 
 ## Features
 
--
+- Add a Bitcoin wallet address.
+- Remove a Bitcoin wallet address.
+- Get Bitcoin wallet address balance details.
+- Get transactions of a Bitcoin wallet address.
 
 ## Requirements
 
@@ -34,37 +37,72 @@
 ### Setting up dependencies
 - Clone the repository from github
 - cd into the project directory.
+
+Install Poetry (dependency manager)
 ```console
 $ pip3 install poetry
 ```
 
+Install all dependencies
 ```console
 $ poetry install
 ```
+
 ### Cassandra
+-Get the latest Cassandra docker image.
 ```console
 $ docker pull cassandra
 ```
 
+-Start Cassandra container
 ```console
 $ docker run -p 9042:9042 -d cassandra:latest
 ```
 
+- Open up a CQL shell
 ```console
 $ docker exec -it <container_id> cqlsh
 ```
 
+- Create a keyspace (database)
 ```console
 $ CREATE KEYSPACE IF NOT EXISTS cointracker WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 ```
 
+- Create a test user
 ```console
 $ INSERT INTO cointracker.user(id, first_name, last_name, email_id, created_at, updated_at,bucket_id) VALUES (uuid(), 'John', 'Doe', 'john.doe@example.com', toTimeStamp(now()), toTimeStamp(now()), 1);
 ```
 
 ## Usage
 
-Please see the [Command-line Reference] for details.
+Start the back-end server
+```console
+poetry run uvicorn cointracker.app:app
+```
+
+From another console, send API requests
+
+- Add a wallet address
+```console
+$ curl -v -X POST "http://localhost:8000/v1/users/john.doe@example.com/wallets/btc/<address>"
+```
+
+- Remove a wallet address
+```console
+$ curl -v -X DELETE "http://localhost:8000/v1/users/john.doe@example.com/wallets/btc/<address>"
+```
+
+- Get wallet details
+```console
+$ curl -v http://localhost:8000/v1/users/john.doe@example.com/wallets/btc/<address>
+```
+
+- Get transactions
+```console
+$ curl -v "http://localhost:8000/v1/wallets/btc/<address>/transactions?limit=200&token=<token>"
+```
+Initially token can be absent. In subsequent requests, use the token returned in the response headers(X-Token).
 
 ## Contributing
 
