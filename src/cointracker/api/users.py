@@ -20,9 +20,7 @@ class Users:
 
     async def on_get_user(self, req, resp, user_id):
         try:
-            print("id is ", user_id)
             entry = self.storage.get_user(user_id)
-            print(dict(entry))
             resp.text = json.dumps(dict(entry), indent=4, sort_keys=True, default=str)
         except Exception as e:
             print(e)

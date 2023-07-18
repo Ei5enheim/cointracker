@@ -43,7 +43,6 @@ class Wallets:
 
         network = Network.BTC
         try:
-            print("input is: ", network, address)
             entry = self.storage.get_wallet(network, address)
             resp.text = json.dumps(dict(entry), indent=4, sort_keys=True, default=str)
         except Exception as e:
@@ -59,14 +58,12 @@ class Wallets:
 
         network = Network.BTC
         try:
-            print("input is: ", user_id, network, address)
             user_inst = self.storage.get_user(user_id)
             if user_inst is None:
                 resp.status = falcon.HTTP_404
                 resp.text = "Resource not found"
                 return
             entry = self.storage.remove_wallet(network, address, user_inst)
-            print(dict(entry))
             resp.text = json.dumps(dict(entry), indent=4, sort_keys=True, default=str)
         except Exception as e:
             print(e)
@@ -80,7 +77,6 @@ class Wallets:
             return
 
         network = Network.BTC
-        print("wallet address", address)
         try:
             is_valid_address_for_coinsymbol(address, network.value)
         except AssertionError as e:
@@ -90,7 +86,6 @@ class Wallets:
             return
 
         try:
-            print("input is: ", user_id, network, address)
             user_inst = self.storage.get_user(user_id)
             if user_inst is None:
                 resp.status = falcon.HTTP_404
@@ -142,7 +137,6 @@ class Wallets:
                 self.storage.add_transactions(
                     wallet, txns, max_bucket_id, bucket_id, bucket_id
                 )
-                print(n_txns, before, has_more)
                 bucket_id -= 1
                 time.sleep(0.25)
 

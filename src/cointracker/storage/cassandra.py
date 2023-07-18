@@ -65,7 +65,6 @@ class CassandraStorageEngine(StorageEngine):
 
     def remove_wallet(self, network: Network, address: str, user: User):
         wallets = user.wallets
-        print(wallets)
         network_wallets = wallets.get(network.value, [])
         if address in network_wallets:
             network_wallets.remove(address)

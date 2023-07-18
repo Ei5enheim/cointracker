@@ -15,7 +15,6 @@ class BlockCypher(NetworkIntegration):
         address_details = blockcypher.get_address_details(
             address, network.value, txn_limit=page_size, before_bh=transactions_before
         )
-        # print(address_details, transactions_before)
 
         return address_details
 
@@ -26,10 +25,8 @@ class BlockCypher(NetworkIntegration):
         address_details = blockcypher.get_address_details(
             address, network.value, txn_limit=page_size, after_bh=transactions_after
         )
-        print(address_details, transactions_after)
         return address_details
 
     def get_balance(self, network: Network, address: str):
         balance_details = blockcypher.get_address_overview(address, network.value)
-        print(balance_details)
         return balance_details
